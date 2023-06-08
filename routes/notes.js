@@ -130,3 +130,14 @@ const renderNoteList = (notes) => {
     });
   }
 };
+
+const getAndRenderNotes = () => {
+  return getNotes().then(renderNoteList);
+};
+
+saveNoteBtn.addEventListener('click', handleNoteSave);
+newNoteBtn.addEventListener('click', handleNewNoteView);
+noteTitle.addEventListener('keyup', handleRenderSaveBtn);
+noteText.addEventListener('keyup', handleRenderSaveBtn);
+
+getAndRenderNotes();
