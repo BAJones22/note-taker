@@ -21,4 +21,3 @@ notesRoute.post('/', (req, res) => {
 });
 
 module.exports = notesRoute; 
-
