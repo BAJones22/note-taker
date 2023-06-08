@@ -54,3 +54,31 @@ const renderActiveNote = () => {
     noteText.value = '';
   }
 };
+
+const handleNoteSave = () => {
+  const newNote = {
+    title: noteTitle.value,
+    text: noteText.value,
+  };
+
+  saveNote(newNote).then(() => {
+    getAndRenderNotes();
+    renderActiveNote();
+  });
+};
+
+const handleNoteDelete = (e) => {
+  e.stopPropagation();
+
+  const note = e.target;
+  const noteId = JSON.parse(note.parentElement.getAttribute('data-note')).id;
+
+  if (activeNote.id === noteId) {
+    activeNote = {};
+  }
+  
+  deleteNote(noteId).then(() => {
+    getAndRenderNotes();
+    renderActiveNote();
+  });
+};
