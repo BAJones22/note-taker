@@ -101,3 +101,32 @@ const handleRenderSaveBtn = () => {
     show(saveNoteBtn);
   }
 };
+
+const renderNoteList = (notes) => {
+  noteList.innerHTML = '';
+
+  if (notes.length === 0) {
+    const emptyMessage = document.createElement('li');
+    emptyMessage.classList.add('list-group-item');
+    emptyMessage.innerText = 'No saved Notes';
+    noteList.append(emptyMessage);
+  } else {
+    notes.forEach((note) => {
+      const listItem = document.createElement('li');
+      listItem.classList.add('list-group-item');
+      listItem.setAttribute('data-note', JSON.stringify(note));
+      listItem.addEventListener('click', handleNoteView);
+
+      const titleElement = document.createElement('span');
+      titleElement.classList.add('list-item-title');
+      titleElement.innerText = note.title;
+
+      const deleteIcon = document.createElement('i');
+      deleteIcon.classList.add('fas', 'fa-trash-alt', 'float-right', 'text-danger', 'delete-note');
+      deleteIcon.addEventListener('click', handleNoteDelete);
+
+      listItem.append(titleElement, deleteIcon);
+      noteList.append(listItem);
+    });
+  }
+};
